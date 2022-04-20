@@ -12,6 +12,7 @@ export class PostService {
 
   constructor(private angularFirestore: AngularFirestore) { }
   //Create CRUD METHODS
+  //traemos todos los post
   getPost(){
       return this.angularFirestore
       .collection("citizen")
@@ -19,9 +20,9 @@ export class PostService {
   }
   getPostById(id){
     return this.angularFirestore
-    .collection("citizen")
-    .doc(id)
-    .valueChanges()
+      .collection("citizen")
+      .doc(id)
+      .valueChanges()
 
   }
   createPost(post: Post){
@@ -40,14 +41,13 @@ export class PostService {
   }
   updatePost(post: Post, id){
     return this.angularFirestore
-    .collection("citizen")
-    .doc(id)
-    .update({
-      id: post.id,
-      birthdate: post.birthdate,
-      mail: post.mail,
-      name: post.name,
-      password: post.password
+      .collection("citizen")
+      .doc(id)
+      .update({
+        birthdate: post.birthdate,
+        mail: post.mail,
+        name: post.name,
+        password: post.password
     });
 
   }

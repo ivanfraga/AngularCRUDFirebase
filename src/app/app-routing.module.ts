@@ -10,7 +10,7 @@ import { ShowComponent } from './components/show/show.component';
 const routes: Routes = [
   {path: '', component:ShowComponent},
   {path: 'create', component:CreateComponent},
-  {path: 'edit/id', component:EditComponent},
+  {path: 'edit/:id', component:EditComponent},
 ];
 
 @NgModule({
