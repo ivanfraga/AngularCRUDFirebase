@@ -15,9 +15,10 @@ export class PostService {
   //traemos todos los post
   getPost(){
       return this.angularFirestore
-      .collection("citizen")
+      .collection("citizen", ref => ref.where('rol', '==', 'no artist')) //filtrado de usuarios no artistas
       .snapshotChanges()
   }
+  //traer un perfil en especifico
   getPostById(id){
     return this.angularFirestore
       .collection("citizen")
@@ -25,11 +26,18 @@ export class PostService {
       .valueChanges()
 
   }
+  //crear un perfil
   createPost(post: Post){
     return new Promise<any> ((resolve, reject) => {
       this.angularFirestore
       .collection("citizen")
-      .add(post)
+      .add({
+        birthdate: post.birthdate,
+        mail: post.mail,
+        name: post.name,
+        password: post.password,
+        rol: post.rol= 'no artist'
+      })
       .then((response) => {
         console.log(response)
       },
@@ -39,6 +47,7 @@ export class PostService {
       })
 
   }
+  //actualizar perfil
   updatePost(post: Post, id){
     return this.angularFirestore
       .collection("citizen")
@@ -51,6 +60,17 @@ export class PostService {
     });
 
   }
+
+  //cambiar de rol
+  updateRol(post: Post){
+    return this.angularFirestore
+      .collection("citizen")
+      .doc(post.id)
+      .update({
+        rol: post.rol= 'artist'
+      })
+  }
+  //eliminar perfil
   deletePost(post){
     return this.angularFirestore
     .collection("citizen")

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 //IMPORT MODEL
 import { Post } from 'src/app/post.model';
@@ -12,9 +13,10 @@ import { PostService } from 'src/app/post.service';
   styleUrls: ['./show.component.css']
 })
 export class ShowComponent implements OnInit {
-  Post: Post[]
+  Post: Post[];
+  
 
-  constructor( private postService: PostService) { }
+  constructor( private postService: PostService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.postService.getPost().subscribe((res) =>{
@@ -28,5 +30,7 @@ export class ShowComponent implements OnInit {
   }
 
   deleteRow = (post) => this.postService.deletePost(post);
+
+  convertToArtist= (post) => this.postService.updateRol(post);
 
 }

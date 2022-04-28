@@ -5,4 +5,5 @@ export class Post {
     mail: string;
     name: string;
     password: string;
+    rol: string;
 }
